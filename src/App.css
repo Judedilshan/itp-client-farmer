@@ -1,38 +1,43 @@
-.App {
-  text-align: center;
+.list {
+  text-align: left;
+  max-width: 750px;
+  margin: auto;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.submit-form {
+  margin-top: 10%;
+  margin-left: 40%;
+  max-width: 300px;
+  /* margin: auto; */
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.edit-form {
+  margin-top: 10%;
+  margin-left: 40%;
+  max-width: 300px;
+  /* margin: auto; */
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.col-md-8 {
+  margin-top: 20%;
+  margin-left: 70%;
 }
 
-.App-link {
-  color: #61dafb;
+.col-md-6 {
+  width: 100%;
+  display: block;
+  left: 70%;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.toVetTaskForm{
+  background-color:#152238;
+  width: 800px;
+  height:500px;
+  padding-left:40px;
+  padding-right:40px;
+  padding-top: 80px;
+  margin-left:500px;
+  margin-top:200px;
+  border-radius:10px;
+  color: aliceblue;
 }

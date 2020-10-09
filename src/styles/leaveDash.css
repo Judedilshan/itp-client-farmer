@@ -1,0 +1,78 @@
+/* .tab {
+  display: block;
+  padding-top: 4.4px;
+  padding-bottom: 4.4px;
+  padding-right: 0px;
+  padding-left: 0px;
+  background-color: #a4a4a4;
+  border-radius: 20px;
+  border-top-right-radius: 60px;
+  border-bottom-left-radius: 60px;
+} */
+
+.topic {
+  position: fixed;
+  top: 18%;
+  left: 25%;
+  font-size: 200%;
+}
+
+#tab1,
+#tab2,
+#tab3,
+#tab4 {
+  position: relative;
+  display: block;
+  opacity: 0.8;
+}
+
+#tab1 {
+  margin-top: 14%;
+  margin-right: 54%;
+  margin-left: 25%;
+}
+
+#tab2 {
+  margin-top: -148px;
+  margin-right: 19%;
+  margin-left: 60%;
+}
+
+#tab3 {
+  margin-top: 5%;
+  margin-right: 54%;
+  margin-left: 25%;
+}
+
+#tab4 {
+  margin-top: -148px;
+  margin-right: 19%;
+  margin-left: 60%;
+}
+
+.tab a {
+  padding: 60px 0px 60px 0px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #000000;
+  background-color: #a4a4a4;
+  display: block;
+  transition: 0.3s;
+  text-align: center;
+  border-radius: 60px;
+  /* border-top-right-radius: 60px;
+  border-bottom-left-radius: 60px; */
+}
+
+.tab a:hover {
+  padding: 60px 0px 60px 0px;
+  background-color: rgb(196, 196, 196);
+  text-decoration: none;
+  color: #f1f1f1;
+  font-size: 25px;
+  text-align: center;
+  border-radius: 10px;
+  /* border-top-left-radius: 60px;
+  border-bottom-right-radius: 60px; */
+  transition: 1s;
+}
