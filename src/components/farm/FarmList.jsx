@@ -1,45 +1,45 @@
 import React, { Component } from "react";
-import FarmerManagementDataService from "../../services/farmer.management.service";
+import FarmManagementDataService from "../../services/farm.management.service";
 import { Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../../App.css";
 
-export default class FarmerList extends Component {
+export default class FarmList extends Component {
   constructor(props) {
     super(props);
-    this.onChangeSearchFarmerName = this.onChangeSearchFarmerName.bind(this);
-    this.retrieveFarmers = this.retrieveFarmers.bind(this);
+    this.onChangeSearchFarmName = this.onChangeSearchFarmName.bind(this);
+    this.retrieveFarm = this.retrieveFarms.bind(this);
     this.refreshList = this.refreshList.bind(this);
-    this.setActiveFarmers = this.setActiveFarmers.bind(this);
-    this.removeAllFarmers = this.removeAllFarmers.bind(this);
-    this.searchFarmerName = this.searchFarmerName.bind(this);
+    this.setActiveFarms = this.setActiveFarms.bind(this);
+    this.removeAllFarms = this.removeAllFarms.bind(this);
+    this.searchFarmName = this.searchFarmName.bind(this);
 
     this.state = {
-      farmer: [],
-      currentFarmer: null,
+      farm: [],
+      currentFarm: null,
       currentIndex: -1,
-      searchFarmerName: "",
+      searchFarmName: "",
     };
+
   }
 
   componentDidMount() {
-    this.retrieveFarmers();
+    this.retrieveFarms();
   }
 
-  onChangeSearchFarmerName(e) {
-    const searchFarmerName = e.target.value;
+  onChangeSearchFarmName(e) {
+    const searchFarmName = e.target.value;
 
     this.setState({
-      searchFarmerName: searchFarmerName,
+      searchFarmName: searchFarmName,
     });
   }
 
-  retrieveFarmers() {
-    FarmerManagementDataService.getAll()
+  retrieveFarms() {
+    FarmManagementDataService.getAll()
       .then((response) => {
         this.setState({
-
-          farmer: response.data,
+          farm: response.data,
         });
         console.log(response.data);
       })
@@ -49,22 +49,22 @@ export default class FarmerList extends Component {
   }
 
   refreshList() {
-    this.retrieveFarmerName();
+    this.retrieveFarmName();
     this.setState({
-      currentFarmer: null,
+      currentFarm: null,
       currentIndex: -1,
     });
   }
 
-  setActiveFarmers(far, index) {
+  setActiveFarms(far, index) {
     this.setState({
-      currentFarmer: far,
+      currentFarm: far,
       currentIndex: index,
     });
   }
 
-  removeAllFarmers() {
-    FarmerManagementDataService.deleteAll()
+  removeAllFarms() {
+    FarmManagementDataService.deleteAll()
       .then((response) => {
         console.log(response.data);
         this.refreshList();
@@ -74,11 +74,11 @@ export default class FarmerList extends Component {
       });
   }
 
-  searchFarmerName() {
-    FarmerManagementDataService.findByFarmerName(this.state.searchFarmerName)
+  searchFarmName() {
+    FarmManagementDataService.findByFarmName(this.state.searchFarmName)
       .then((response) => {
         this.setState({
-          farmer: response.data,
+          farm: response.data,
         });
         console.log(response.data);
       })
@@ -89,9 +89,9 @@ export default class FarmerList extends Component {
 
   render() {
     const {
-      searchFarmerName,
-      farmer,
-      currentFarmer,
+      searchFarmName,
+      farm,
+      currentFarm,
       currentIndex,
     } = this.state;
 
@@ -104,15 +104,15 @@ export default class FarmerList extends Component {
             <input
               type="text"
               className="form-control"
-              placeholder="Search by farmer Name"
-              value={searchFarmerName}
-              onChange={this.onChangeSearchFarmerName}
+              placeholder="Search by farm Name"
+              value={searchFarmName}
+              onChange={this.onChangeSearchFarmName}
             />
             <div className="input-group-append">
               <button
                 className="btn btn-outline-secondary"
                 type="button"
-                onClick={this.searchFarmerName}
+                onClick={this.searchFarmName}
               >
                 Search
               </button>
@@ -121,22 +121,22 @@ export default class FarmerList extends Component {
         </div>
         
         <div className="col-md-6">
-          <h4>Farmers List</h4>
+          <h4>Farms List</h4>
 
           <ul className="list-group">
-            {farmer &&
+            {farm &&
 
             //need to check
-              farmer.map((far, index) => (
+              farm.map((far, index) => (
                 <li
                   className={
                     "list-group-item " +
                     (index === currentIndex ? "active" : "")
                   }
-                  onClick={() => this.setActiveFarmers(far, index)}
+                  onClick={() => this.setActiveFarms(far, index)}
                   key={index}
                 >
-                  {far.farmerName}
+                  {far.farmName}
                   
                 </li>
               ))}
@@ -144,13 +144,13 @@ export default class FarmerList extends Component {
 
           <button
             className="m-3 btn btn-sm btn-danger"
-            onClick={this.removeAllFarmers}
+            onClick={this.removeAllFarms}
           >
-            Remove All Farmer Details
+            Remove All Farm Details
           </button>
           <Link
           //check this
-            to={"/farmer-management/farmers/add-farmer"}
+            to={"/farm-management/farms/add-farm"}
             className="badge badge-warning"
           >
             Add Details
@@ -159,35 +159,29 @@ export default class FarmerList extends Component {
           
         </div>
         <div className="col-md-6">
-          {currentFarmer ? (
+          {currentFarm ? (
             <div>
-              <h4>Farmer Details</h4>
+              <h4>Farm Details</h4>
+            
               <div>
                 <label>
-                  <strong>Farmer Name:</strong>
+                  <strong>Farm Name:</strong>
                 </label>{" "}
-                {currentFarmer.farmerName} {/* in here .policy = title */}
+                {currentFarm.farmName} {/* in here .policy = title */}
               </div>
 
+              <div>
+                <label>
+                  <strong>Farm Id:</strong>
+                </label>{" "}
+                {currentFarm.farmId} {/* in here .policy = title */}
+              </div>
+            
               <div>
                 <label>
                   <strong>Contact number :</strong>
                 </label>{" "}
-                {currentFarmer.contact} 
-              </div>
-
-               <div>
-                <label>
-                  <strong>Address :</strong>
-                </label>{" "}
-                {currentFarmer.contact} 
-              </div>
-
-              <div>
-                <label>
-                  <strong>Email :</strong>
-                </label>{" "}
-                {currentFarmer.contact} 
+                {currentFarm.contact} 
               </div>
 
 
@@ -195,11 +189,11 @@ export default class FarmerList extends Component {
                 <label>
                   <strong>Status:</strong>
                 </label>{" "}
-                {currentFarmer.validity ? "Valid" : "Invalid"}
+                {currentFarm.validity ? "Valid" : "Invalid"}
               </div>
 
               <Link
-                to={"/farmer-management/farmers/" + currentFarmer.id}
+                to={"/farm-management/farms/" + currentFarm.id}
                 className="badge badge-warning"
               >
                 Edit Details
@@ -208,7 +202,7 @@ export default class FarmerList extends Component {
           ) : (
             <div>
               <br />
-              <p>Click on a Farmer to View the Id...</p>
+              <p>Click on a Farm to View the Id...</p>
             </div>
           )}
         </div>

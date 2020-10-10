@@ -8,7 +8,8 @@ export default class EditFarmer extends Component {
     super(props);
     this.onChangeFarmerName = this.onChangeFarmerName.bind(this);
     this.onChangeContact = this.onChangeContact.bind(this);
-    // this.onChangeId = this.onChangeId.bind(this);
+    this.onChangeAddress = this.onChangeAddress.bind(this);
+    this.onChangeEmail = this.onChangeEmail.bind(this);
     this.getFarmer = this.getFarmer.bind(this);
     this.updateValidity = this.updateValidity.bind(this);
     this.updateFarmer = this.updateFarmer.bind(this);
@@ -17,9 +18,10 @@ export default class EditFarmer extends Component {
     this.state = {
       currentFarmer: {
         id: null,
-        farmerName: "" /*title*/,
+        farmerName: "",
         contact: "",
-        // Id: "",
+        address: "",
+        email: "",
         validity: false,
       },
       message: "",
@@ -37,11 +39,12 @@ export default class EditFarmer extends Component {
       return {
         currentFarmer: {
           ...prevState.currentFarmer,
-          farmerName: farmerName /* in here .policy = title */,
+          farmerName: farmerName,
         },
       };
     });
   }
+
   onChangeContact(e) {
     const contact = e.target.value;//
 
@@ -49,22 +52,37 @@ export default class EditFarmer extends Component {
       return {
         currentFarmer: {
           ...prevState.currentFarmer,
-          contact: contact /* in here .policy = title */,
+          contact: contact ,
         },
       };
     });
   }
 
-  // onChangeId(e) {
-  //   const Id = e.target.value;
+   onChangeAddress(e) {
+    const address = e.target.value;//
 
-  //   this.setState((prevState) => ({
-  //     currentDetails: {
-  //       ...prevState.currentDetails,
-  //       Id: Id,
-  //     },
-  //   }));
-  // }
+    this.setState(function (prevState) {
+      return {
+        currentFarmer: {
+          ...prevState.currentFarmer,
+          address: address ,
+        },
+      };
+    });
+  }
+
+  onChangeEmail(e) {
+    const email = e.target.value;//
+
+    this.setState(function (prevState) {
+      return {
+        currentFarmer: {
+          ...prevState.currentFarmer,
+          email: email ,
+        },
+      };
+    });
+  }
 
   getFarmer(id) {
     FarmerManagementDataService.get(id)
@@ -84,6 +102,8 @@ export default class EditFarmer extends Component {
       id: this.state.currentFarmer.id,
       farmerName: this.state.currentFarmer.farmerName,
       contact: this.state.currentFarmer.contact,
+      address: this.state.currentFarmer.address,
+      email: this.state.currentFarmer.email,
       validity: status,
     };
 
@@ -161,16 +181,28 @@ export default class EditFarmer extends Component {
               </div>
 
 
-              {/* <div className="form-group">
-                <label htmlFor="Id">Batch Id</label>
+              <div className="form-group">
+                <label htmlFor="address">Address</label>
                 <input
                   type="text"
                   className="form-control"
-                  id="batchId"
-                  value={currentDetails.Id}
-                  onChange={this.onChangeId}
+                  id="address"
+                  value={currentFarmer.address}
+                  onChange={this.onChangeAddress}
                 />
-              </div> */}
+              </div>
+
+              <div className="form-group">
+                <label htmlFor="email">E-mail</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="email"
+                  value={currentFarmer.email}
+                  onChange={this.onChangeEmail}
+                />
+              </div>
+
 
 
               <div className="form-group">
@@ -196,6 +228,20 @@ export default class EditFarmer extends Component {
                 Valid
               </button>
             )}
+
+{/* just trying
+
+{currentFarmer.validity ? " "}
+              </div>
+            </form>
+
+            {currentFarmer.validity ? (
+             
+            )}
+
+
+
+             */}
 
             <button
               className="badge badge-danger mr-2"

@@ -15,6 +15,10 @@ import FarmerList from "./components/farmer/FarmerList";
 import EditFarmer from "./components/farmer/EditFarmer";
 import AddFarmer from "./components/farmer/AddFarmer";
 
+// import FarmList from "./components/farm/FarmList";
+// import EditFarm from "./components/farm/EditFarm";
+// import AddFarm from "./components/farm/AddFarm";
+
 import SideNavLeaves from "./components/SideNavLeaves";
 
 class App extends Component {

@@ -8,15 +8,17 @@ export default class AddFarmer extends Component {
     super(props);
     this.onChangeFarmerName = this.onChangeFarmerName.bind(this);
     this.onChangeContact = this.onChangeContact.bind(this);
-    // this.onChangeId = this.onChangeId.bind(this);
+    this.onChangeAddress = this.onChangeAddress.bind(this);
+    this.onChangeEmail = this.onChangeEmail.bind(this);
     this.saveFarmer = this.saveFarmer.bind(this);
     this.newFarmer = this.newFarmer.bind(this);
 
     this.state = {
       id: null,
-      farmerName: "" /*title*/,
+      farmerName: "" ,
       contact: "" ,
-    //   batchId: "",
+      address:"",
+      email:'',
       validity: false,
 
       submitted: false,
@@ -35,17 +37,24 @@ export default class AddFarmer extends Component {
     });
   }
 
-//   onChangeId(e) {
-//     this.setState({
-//       batchId: e.target.value,
-//     });
-//   }
+  onChangeAddress(e) {
+    this.setState({
+    address: e.target.value,
+    });
+  }
+
+  onChangeEmail(e) {
+    this.setState({
+      email: e.target.value,
+    });
+  }
 
   saveFarmer() {
     var data = {
       farmerName: this.state.farmerName,
-      contact: this.state.contact,   // check
-    //   batchId: this.state.batchId,
+      contact: this.state.contact,  
+      address: this.state.address,
+      email: this.state.email,
     };
 
     FarmerManagementDataService.create(data)
@@ -54,7 +63,8 @@ export default class AddFarmer extends Component {
           id: response.data.id,
           farmerName: response.data.farmerName,
           contact: response.data.contact,
-        //   batchId: response.data.batchId,
+          address: response.data.address,
+          email: response.data.email,
           validity: response.data.validity,
 
           submitted: true,
@@ -71,7 +81,8 @@ export default class AddFarmer extends Component {
       id: null,
       farmerName: "",
       contact:"",
-    //   batchId: "",
+      address:"",
+      email:"",
       validity: false,
 
       submitted: false,
@@ -117,18 +128,31 @@ export default class AddFarmer extends Component {
               />
             </div>
 
-            {/* <div className="form-group">
-              <label htmlFor="batchId">Batch Id</label>
+            <div className="form-group">
+              <label htmlFor="address">Address</label>
               <input
                 type="text"
                 className="form-control"
-                id="Id"
+                id="address"
                 required
-                value={this.state.batchId}
-                onChange={this.onChangeId}
-                name="batchId"
+                value={this.state.address}
+                onChange={this.onChangeAddress}
+                name="address"
               />
-            </div> */}
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="email">E-mail</label>
+              <input
+                type="text"
+                className="form-control"
+                id="email"
+                required
+                value={this.state.email}
+                onChange={this.onChangeEmail}
+                name="email"
+              />
+            </div>
 
             <button onClick={this.saveFarmer} className="btn btn-success">
               Submit
